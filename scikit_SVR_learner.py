@@ -1,26 +1,25 @@
-from sklearn.datasets import load_iris
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import classification_report
+import numpy as np
+
 from sklearn.cross_validation import StratifiedShuffleSplit
+from sklearn.metrics import classification_report
+from sklearn.svm import SVR
 
-import pydotplus
 
-class neural_network:
+class support_vector_machines_SVR:
     def __init__(self, X, Y):
         self.split(X, Y)
         return
 
-    def split(self,X,Y):
+    def split(self, X, Y):
         split = StratifiedShuffleSplit(Y, n_iter=1, test_size=0.2, random_state=0)
         train_index, test_index = list(split)[0]
         self.trainX, self.trainY = X[train_index], Y[train_index]
         self.testX, self.testY = X[test_index], Y[test_index]
 
     def train(self):
-        clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(15,), random_state=1)
+        clf = SVR(C=1.0, epsilon=0.2)
         clf.fit(self.trainX, self.trainY)
+
         y_pred = clf.predict(self.testX)
-        # dot_data = MLPClassifier.export_graphviz(clf, out_file=None)
-        # graph = pydotplus.graph_from_dot_data(dot_data)
-        # graph.write_pdf("iris_neuralnetwork.pdf")
+
         print(classification_report(self.testY, y_pred))

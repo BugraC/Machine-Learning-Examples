@@ -35,6 +35,6 @@ class decision_tree:
         y_pred_benchmark = tree_benchmark.predict(self.testX)
         print(classification_report(self.testY, y_pred_benchmark))
 
-        dot_data = tree.export_graphviz(tree_benchmark, out_file=None)
+        dot_data = tree.export_graphviz(tree_benchmark,class_names=True, out_file=None)
         graph = pydotplus.graph_from_dot_data(dot_data)
-        graph.write_pdf("iris_decisiontree_without_boost.pdf")
+        graph.write_pdf("wine-quality-red.pdf")
