@@ -1,3 +1,33 @@
+@relation movie_metadata
+@attribute color string
+@attribute director_name string
+@attribute num_critic_for_reviews numeric
+@attribute duration numeric
+@attribute director_facebook_likes numeric
+@attribute actor_3_facebook_likes numeric
+@attribute actor_2_name string
+@attribute actor_1_facebook_likes numeric
+@attribute gross numeric
+@attribute genres string
+@attribute actor_1_name string
+@attribute movie_title string
+@attribute num_voted_users numeric
+@attribute cast_total_facebook_likes numeric
+@attribute actor_3_name string
+@attribute facenumber_in_poster numeric
+@attribute plot_keywords string
+@attribute movie_imdb_link string
+@attribute num_user_for_reviews numeric
+@attribute language {Aboriginal, Arabic, Aramaic, Bosnian, Cantonese, Chinese, Czech, Danish, Dari, Dutch, Dzongkha, English, Filipino, French, German, Greek, Hebrew, Hindi, Hungarian, Icelandic, Indonesian, Italian, Japanese, Kannada, Kazakh, Korean, Mandarin, Maya, Mongolian, None, Norwegian, Panjabi, Persian, Polish, Portuguese, Romanian, Russian, Slovenian, Spanish, Swedish, Swahili, Tamil, Telugu, Thai, Urdu, Vietnamese, Zulu, N/A}
+@attribute country {Afghanistan, Argentina, Aruba, Australia, Bahamas, Belgium, Brazil, Bulgaria, Cambodia, Cameroon, Canada, Chile, China, Colombia, Czech_Republic, Denmark, Dominican_Republic, Egypt, Finland, France, Georgia, Germany, Greece, Hong_Kong, Hungary, Iceland, India, Indonesia, Iran, Ireland, Israel, Italy, Japan, Kenya, Kyrgyzstan, Libya, Mexico, Netherlands, New_Zealand, Nigeria, Norway, Pakistan, Panama, Peru, Philippines, Poland, Romania, Russia, Slovakia, Slovenia, South_Africa, South_Korea, Soviet_Union, Spain, Sweden, Switzerland, Taiwan, Thailand, Turkey, UK, United_Arab_Emirates, USA, West_Germany, N/A}
+@attribute content_rating {Approved, G, GP, NC-17, Not_Rated, Passed, M, PG, PG-13, R, TV-14, TV-G, TV-MA, TV-PG, TV-Y, TV-Y7, Unrated, X, N/A}
+@attribute budget numeric
+@attribute title_year numeric
+@attribute actor_2_facebook_likes numeric
+@attribute aspect_ratio numeric
+@attribute movie_facebook_likes numeric
+@attribute class numeric
+@data
 Color,James_Cameron,723,178,0,855,Joel_David_Moore,1000,760505847,Action|Adventure|Fantasy|Sci-Fi,CCH_Pounder,Avatar ,886204,4834,Wes_Studio,0,avatar|future|marine|native|paraplegic,http://www.imdb.com/title/tt0499549/?ref_=fn_tt_tt_1,3054,English,USA,PG-13,237000000,2009,936,1.78,33000,7.9
 Color,Gore_Verbinski,302,169,563,1000,Orlando_Bloom,40000,309404152,Action|Adventure|Fantasy,Johnny_Depp,Pirates_of_the_Caribbean:_At_Worlds_End ,471220,48350,Jack_Davenport,0,goddess|marriage_ceremony|marriage_proposal|pirate|singapore,http://www.imdb.com/title/tt0449088/?ref_=fn_tt_tt_1,1238,English,USA,PG-13,300000000,2007,5000,2.35,0,7.1
 Color,Sam_Mendes,602,148,0,161,Rory_Kinnear,11000,200074175,Action|Adventure|Thriller,Christoph_Waltz,Spectre ,275868,11700,Stephanie_Sigman,1,bomb|espionage|sequel|spy|terrorist,http://www.imdb.com/title/tt2379713/?ref_=fn_tt_tt_1,994,English,UK,PG-13,245000000,2015,393,2.35,85000,6.8
@@ -5041,3 +5071,5 @@ Color,N/A,43,43,0,319,Valorie_Curry,841,0,Crime|Drama|Mystery|Thriller,Natalie_Z
 Color,Benjamin_Roberds,13,76,0,0,Maxwell_Moody,0,0,Drama|Horror|Thriller,Eva_Boehnke,A_Plague_So_Pleasant ,38,0,David_Chandler,0,N/A,http://www.imdb.com/title/tt2107644/?ref_=fn_tt_tt_1,3,English,USA,N/A,1400,2013,0,0,16,6.3
 Color,Daniel_Hsia,14,100,0,489,Daniel_Henney,946,10443,Comedy|Drama|Romance,Alan_Ruck,Shanghai_Calling ,1255,2386,Eliza_Coupe,5,N/A,http://www.imdb.com/title/tt2070597/?ref_=fn_tt_tt_1,9,English,USA,PG-13,0,2012,719,2.35,660,6.3
 Color,Jon_Gunn,43,90,16,16,Brian_Herzlinger,86,85222,Documentary,John_August,My_Date_with_Drew ,4285,163,Jon_Gunn,0,actress_name_in_title|crush|date|four_word_title|video_camera,http://www.imdb.com/title/tt0378407/?ref_=fn_tt_tt_1,84,English,USA,PG,1100,2004,23,1.85,456,6.6
+
+
