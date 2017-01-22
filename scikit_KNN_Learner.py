@@ -23,20 +23,7 @@ class KNNLearner:
         # Fit the model on the training data.
         knn.fit(self.trainX, self.trainY)
         # Make point predictions on the test set using the fit model.
-        y_pred = knn.predict(self.testX)
+        self.y_pred = knn.predict(self.testX)
 
-        print(classification_report(self.testY, y_pred))
-
-        # # load iris the datasets
-        # dataset = datasets.load_iris()
-        # # fit a k-nearest neighbor model to the data
-        # model = KNeighborsClassifier()
-        # model.fit(dataset.data, dataset.target)
-        # print(model)
-        # # make predictions
-        # expected = dataset.target
-        # predicted = model.predict(dataset.data)
-        # # summarize the fit of the model
-        # print(metrics.classification_report(expected, predicted))
-        # print(metrics.confusion_matrix(expected, predicted))
-
+    def report(self):
+        print(classification_report(self.testY, self.y_pred))

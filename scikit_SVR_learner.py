@@ -20,6 +20,7 @@ class support_vector_machines_SVR:
         clf = SVR(C=1.0, epsilon=0.2)
         clf.fit(self.trainX, self.trainY)
 
-        y_pred = clf.predict(self.testX)
+        self.y_pred = clf.predict(self.testX)
 
-        print(classification_report(self.testY, y_pred))
+    def report(self):
+        print(classification_report(self.testY, self.y_pred))
