@@ -12,6 +12,8 @@ from scikit_SVR_learner import support_vector_machines_SVR
 
 def main():
     inf = open(os.path.join(os.path.dirname(__file__), 'data/winequality-white.csv'))
+    # inf = open(os.path.join(os.path.dirname(__file__), 'data/movie_metadata.csv'))
+
     data = np.array([map(float, s.strip().split(',')) for s in inf.readlines()])
     X = data[:, 0:-1]
     Y = data[:, -1]
