@@ -1,20 +1,23 @@
+import matplotlib.pyplot as plt
+
 from sklearn.cross_validation import StratifiedShuffleSplit
-from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.metrics import classification_report
-from sklearn import datasets
-from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import cross_val_score
+from sklearn.neighbors import KNeighborsClassifier
+
+from learning_curve import plot_learning_curve
+
 
 class KNNLearner:
     def __init__(self, X, Y, K, KFolds):
         self.K = K
+        self.X = X
+        self.Y = Y
         self.KFolds = KFolds
         self.split(X, Y)
 
     def split(self,X,Y):
-        split = StratifiedShuffleSplit(Y, n_iter=1, test_size=0.2, random_state=0)
+        split = StratifiedShuffleSplit(Y, n_iter=100, test_size=0.3)
         train_index, test_index = list(split)[0]
         self.trainX, self.trainY = X[train_index], Y[train_index]
         self.testX, self.testY = X[test_index], Y[test_index]
@@ -39,3 +42,6 @@ class KNNLearner:
 
         return CV_Score1, CV_Score2, Accuracy_Score
 
+    def plot_learning_curve(self):
+        plot_learning_curve(self.knn, 'Learning Curves for KNN', self.X, self.Y, ylim=(0.1, 1.01), cv=5, n_jobs=4)
+        plt.show()

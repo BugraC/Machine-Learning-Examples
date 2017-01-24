@@ -22,7 +22,7 @@ def main():
     CV1_Scores = []
     CV2_Scores = []
     Accuracy_Scores = []
-    decisionTree = scikit_decisiontree.decision_tree(X,Y,5)
+    decisionTree = scikit_decisiontree.decision_tree(X, Y, 5, 0)
     decisionTree.train_without_boosting()
 
     CVScore1, CVScore2, Accuracy = decisionTree.report_without_boosting()
@@ -35,24 +35,28 @@ def main():
               'Accuracy Score:': Accuracy_Scores}, index=range(1, 5))
     df.plot()
     plt.show()
+    decisionTree.plot_learning_curve_without_boosting()
 
     print "Decision tree with boosting"
     CV1_Scores = []
     CV2_Scores = []
     Accuracy_Scores = []
-    decisionTree = scikit_decisiontree.decision_tree(X, Y,5)
-    decisionTree.train_with_boosting()
+    limit = 110
+    for i in range(100, limit):
+        decisionTree = scikit_decisiontree.decision_tree(X, Y, 5, i)
+        decisionTree.train_with_boosting()
 
-    CVScore1, CVScore2, Accuracy = decisionTree.report_with_boosting()
-    CV1_Scores = np.append(CV1_Scores, CVScore1)
-    CV2_Scores = np.append(CV2_Scores, CVScore2)
-    Accuracy_Scores = np.append(Accuracy_Scores, Accuracy)
+        CVScore1, CVScore2, Accuracy = decisionTree.report_with_boosting()
+        CV1_Scores = np.append(CV1_Scores, CVScore1)
+        CV2_Scores = np.append(CV2_Scores, CVScore2)
+        Accuracy_Scores = np.append(Accuracy_Scores, Accuracy)
 
     df = pd.DataFrame(
         data={'Cross Validation Score with 5 folds': CV1_Scores, 'Cross Validation Score with 10 folds': CV2_Scores,
-              'Accuracy Score:': Accuracy_Scores}, index=range(1, 5))
+              'Accuracy Score:': Accuracy_Scores}, index=range(100, limit))
     df.plot()
     plt.show()
+    decisionTree.plot_learning_curve_with_boosting()
 
     print "Neural Network"
     CV1_Scores = []
@@ -70,12 +74,14 @@ def main():
               'Accuracy Score:': Accuracy_Scores}, index=range(1, 5))
     df.plot()
     plt.show()
+    neuralNetwork.plot_learning_curve()
 
     print "KNN"
     CV1_Scores = []
     CV2_Scores = []
     Accuracy_Scores = []
     limit = 100
+    knnLearner = None
     for i in range(1,limit):
         knnLearner = scikit_KNN_Learner.KNNLearner(X, Y, i, 5)
         knnLearner.train()
@@ -87,7 +93,7 @@ def main():
     df = pd.DataFrame(data = {'Cross Validation Score with 5 folds' : CV1_Scores, 'Cross Validation Score with 10 folds' : CV2_Scores, 'Accuracy Score:' : Accuracy_Scores }, index=range(1,limit))
     df.plot()
     plt.show()
-
+    knnLearner.plot_learning_curve()
     # supportVectorMachinesSVC = support_vector_machines_SVC(X, Y)
     # supportVectorMachinesSVC.train()
     # supportVectorMachinesSVC.report()
