@@ -5,9 +5,7 @@ import os
 import scikit_KNN_Learner
 import matplotlib.pyplot as plt
 import pandas as pd
-from scikit_SVC_learner import support_vector_machines_SVC
-
-from scikit_SVR_learner import support_vector_machines_SVR
+from scikit_SVC_learner import support_vector_machines
 
 
 def main():
@@ -94,13 +92,40 @@ def main():
     df.plot()
     plt.show()
     knnLearner.plot_learning_curve()
-    # supportVectorMachinesSVC = support_vector_machines_SVC(X, Y)
-    # supportVectorMachinesSVC.train()
-    # supportVectorMachinesSVC.report()
-    #
-    # supportVectorMachinesSVR = support_vector_machines_SVR(X, Y)
-    # supportVectorMachinesSVR.train()
-    # supportVectorMachinesSVR.report()
+
+    print "SVC Linear"
+    CV1_Scores = []
+    CV2_Scores = []
+    Accuracy_Scores = []
+    limit = 100
+    supportVectorMachines = support_vector_machines(X, Y, 5, "rbf")
+    supportVectorMachines.train()
+    CVScore1, CVScore2, Accuracy = supportVectorMachines.report()
+    CV1_Scores = np.append(CV1_Scores, CVScore1)
+    CV2_Scores = np.append(CV2_Scores, CVScore2)
+    Accuracy_Scores = np.append(Accuracy_Scores,Accuracy)
+    df = pd.DataFrame(data = {'Cross Validation Score with 5 folds' : CV1_Scores, 'Cross Validation Score with 10 folds' : CV2_Scores, 'Accuracy Score:' : Accuracy_Scores }, index=range(1,limit))
+    df.plot()
+    supportVectorMachines.plot_learning_curve()
+
+    print "SVC Sigmoid"
+    CV1_Scores = []
+    CV2_Scores = []
+    Accuracy_Scores = []
+    limit = 100
+    supportVectorMachines = support_vector_machines(X, Y, 5, "sigmoid")
+    supportVectorMachines.train()
+    CVScore1, CVScore2, Accuracy = supportVectorMachines.report()
+    CV1_Scores = np.append(CV1_Scores, CVScore1)
+    CV2_Scores = np.append(CV2_Scores, CVScore2)
+    Accuracy_Scores = np.append(Accuracy_Scores, Accuracy)
+    df = pd.DataFrame(
+        data={'Cross Validation Score with 5 folds': CV1_Scores, 'Cross Validation Score with 10 folds': CV2_Scores,
+              'Accuracy Score:': Accuracy_Scores}, index=range(1, limit))
+    df.plot()
+    supportVectorMachines.plot_learning_curve()
+
+
 
 
 if __name__ == "__main__": main()
