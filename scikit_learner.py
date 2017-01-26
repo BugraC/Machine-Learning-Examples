@@ -39,8 +39,9 @@ def main():
     CV1_Scores = []
     CV2_Scores = []
     Accuracy_Scores = []
-    limit = 110
-    for i in range(100, limit):
+    limit = 5
+    decisionTree = None
+    for i in range(1, limit):
         decisionTree = scikit_decisiontree.decision_tree(X, Y, 5, i)
         decisionTree.train_with_boosting()
 
@@ -51,7 +52,7 @@ def main():
 
     df = pd.DataFrame(
         data={'Cross Validation Score with 5 folds': CV1_Scores, 'Cross Validation Score with 10 folds': CV2_Scores,
-              'Accuracy Score:': Accuracy_Scores}, index=range(100, limit))
+              'Accuracy Score:': Accuracy_Scores}, index=range(1, limit))
     df.plot()
     plt.show()
     decisionTree.plot_learning_curve_with_boosting()
@@ -93,34 +94,40 @@ def main():
     plt.show()
     knnLearner.plot_learning_curve()
 
-    print "SVC Linear"
+    print "SVC rbf"
     CV1_Scores = []
     CV2_Scores = []
     Accuracy_Scores = []
     limit = 100
-    supportVectorMachines = support_vector_machines(X, Y, 5, "rbf")
-    supportVectorMachines.train()
-    CVScore1, CVScore2, Accuracy = supportVectorMachines.report()
-    CV1_Scores = np.append(CV1_Scores, CVScore1)
-    CV2_Scores = np.append(CV2_Scores, CVScore2)
-    Accuracy_Scores = np.append(Accuracy_Scores,Accuracy)
-    df = pd.DataFrame(data = {'Cross Validation Score with 5 folds' : CV1_Scores, 'Cross Validation Score with 10 folds' : CV2_Scores, 'Accuracy Score:' : Accuracy_Scores }, index=range(1,limit))
+    gammaSpace = np.logspace(-9, 3, 13)
+    supportVectorMachines = None
+    for i in gammaSpace:
+        supportVectorMachines = support_vector_machines(X, Y, 5, "rbf")
+        supportVectorMachines.train(0,i)
+        CVScore1, CVScore2, Accuracy = supportVectorMachines.report()
+        CV1_Scores = np.append(CV1_Scores, CVScore1)
+        CV2_Scores = np.append(CV2_Scores, CVScore2)
+        Accuracy_Scores = np.append(Accuracy_Scores,Accuracy)
+    df = pd.DataFrame(data = {'Cross Validation Score with 5 folds' : CV1_Scores, 'Cross Validation Score with 10 folds' : CV2_Scores, 'Accuracy Score:' : Accuracy_Scores }, index=gammaSpace)
     df.plot()
     supportVectorMachines.plot_learning_curve()
 
-    print "SVC Sigmoid"
+    print "SVC poly"
     CV1_Scores = []
     CV2_Scores = []
     Accuracy_Scores = []
-    limit = 100
-    supportVectorMachines = support_vector_machines(X, Y, 5, "sigmoid")
-    supportVectorMachines.train()
-    CVScore1, CVScore2, Accuracy = supportVectorMachines.report()
-    CV1_Scores = np.append(CV1_Scores, CVScore1)
-    CV2_Scores = np.append(CV2_Scores, CVScore2)
-    Accuracy_Scores = np.append(Accuracy_Scores, Accuracy)
-    df = pd.DataFrame(
-        data={'Cross Validation Score with 5 folds': CV1_Scores, 'Cross Validation Score with 10 folds': CV2_Scores,
+    limit = 40
+    supportVectorMachines = None
+    for i in range(1, limit):
+        supportVectorMachines = support_vector_machines(X, Y, 5, 'poly')
+        supportVectorMachines.train(i,0)
+        CVScore1, CVScore2, Accuracy = supportVectorMachines.report()
+        CV1_Scores = np.append(CV1_Scores, CVScore1)
+        CV2_Scores = np.append(CV2_Scores, CVScore2)
+        Accuracy_Scores = np.append(Accuracy_Scores, Accuracy)
+
+    df = pd.DataFrame(data={'Cross Validation Score with 5 folds': CV1_Scores,
+                            'Cross Validation Score with 10 folds': CV2_Scores,
               'Accuracy Score:': Accuracy_Scores}, index=range(1, limit))
     df.plot()
     supportVectorMachines.plot_learning_curve()

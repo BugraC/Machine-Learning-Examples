@@ -1,12 +1,15 @@
 import matplotlib.pyplot as plt
 
+import numpy as np
 from sklearn.cross_validation import StratifiedShuffleSplit
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 
 from learning_curve import plot_learning_curve
+from scikit_prunedtree import dtclf_pruned
 
 
 class decision_tree:
@@ -26,25 +29,32 @@ class decision_tree:
         self.testX, self.testY = X[test_index], Y[test_index]
 
     def train_with_boosting(self):
+        rng = np.random.RandomState(1)
         print self.NEstimators
-        self.estimator = GradientBoostingClassifier(n_estimators=self.NEstimators, learning_rate=0.1)
-        self.estimator.fit(self.trainX, self.trainY)
+
+        self.estimator = AdaBoostClassifier(base_estimator= dtclf_pruned(class_weight='auto'),random_state=rng,n_estimators=self.NEstimators, learning_rate=0.1)
+        self.estimator.fit(self.X, self.Y)
+        self.tree = self.estimator.estimators_[-1]
+        self.testX = self.tree.valX
+        self.testY = self.tree.valY
         self.y_pred_with_boost = self.estimator.predict(self.testX)
 
 
 
     def train_without_boosting(self):
-        self.tree_benchmark = DecisionTreeClassifier(class_weight='auto')
-        self.tree_benchmark.fit(self.trainX, self.trainY)
+        self.tree_benchmark = dtclf_pruned(class_weight='auto')
+        self.tree = self.tree_benchmark.fit(self.X, self.Y)
+        self.testX = self.tree.valX
+        self.testY = self.tree.valY
         self.y_pred_benchmark = self.tree_benchmark.predict(self.testX)
 
 
     def report_with_boosting(self):
         # print(classification_report(self.testY, self.y_pred_with_boost))
-        CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.estimator , self.testX, self.testY,
+        CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.estimator , self.X, self.Y,
                                                                cv=self.KFolds).mean(), cross_val_score(self.estimator,
-                                                                                                       self.testX,
-                                                                                                       self.testY,
+                                                                                                       self.X,
+                                                                                                       self.Y,
                                                                                                        cv=self.KFolds * 2).mean(), accuracy_score(
             self.testY, self.y_pred_with_boost)
 
@@ -56,10 +66,10 @@ class decision_tree:
         # dot_data = tree.export_graphviz(self.tree_benchmark, class_names=True, out_file=None)
         # graph = pydotplus.graph_from_dot_data(dot_data)
         # graph.write_pdf("wine-quality-red.pdf")
-        CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.tree_benchmark, self.testX, self.testY,
+        CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.tree_benchmark, self.X, self.Y,
                                                                cv=self.KFolds).mean(), cross_val_score(self.tree_benchmark,
-                                                                                                       self.testX,
-                                                                                                       self.testY,
+                                                                                                       self.X,
+                                                                                                       self.Y,
                                                                                                        cv=self.KFolds * 2).mean(), accuracy_score(
             self.testY, self.y_pred_benchmark)
 

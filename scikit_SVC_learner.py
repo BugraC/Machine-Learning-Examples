@@ -7,6 +7,7 @@ from sklearn.model_selection import cross_val_score
 from learning_curve import plot_learning_curve
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
+from sklearn.model_selection import GridSearchCV
 
 class support_vector_machines:
     def __init__(self, X, Y, KFolds, kernelFunction):
@@ -25,11 +26,19 @@ class support_vector_machines:
         self.testX, self.testY = X[test_index], Y[test_index]
 
 
-    def train(self):
-        self.clf = svm.SVC(kernel= self.kernelFunction)
+    def train(self, degree, gamma):
+        C = 1.0
+        if self.kernelFunction == 'poly':
+            self.clf = svm.SVC(degree=degree, C=C, cache_size=240000)
+        elif self.kernelFunction == 'rbf':
+            self.clf = svm.SVC(kernel=self.kernelFunction, gamma=gamma, C=C, cache_size=240000)
+        # X = np.array([[-1, -1], [-2, -1], [1, 1], [2, 1]])
+        # y = np.array([1, 1, 2, 2])
         self.clf.fit(self.trainX, self.trainY)
-
+        # self.clf.fit(X, y)
         self.y_pred = self.clf.predict(self.testX)
+        # self.y_pred = self.clf.predict([[-0.8, -1]])
+
 
 
 
