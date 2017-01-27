@@ -61,16 +61,20 @@ def main():
     CV1_Scores = []
     CV2_Scores = []
     Accuracy_Scores = []
-    neuralNetwork = scikit_neuralnetwork.neural_network(X,Y,5)
-    neuralNetwork.train()
-    CVScore1, CVScore2, Accuracy = neuralNetwork.report()
-    CV1_Scores = np.append(CV1_Scores, CVScore1)
-    CV2_Scores = np.append(CV2_Scores, CVScore2)
-    Accuracy_Scores = np.append(Accuracy_Scores, Accuracy)
+    limit = 100
+    neuralNetwork = None
+    for i in range(1, limit,10):
+        print i
+        neuralNetwork = scikit_neuralnetwork.neural_network(X,Y,5,i)
+        neuralNetwork.train()
+        CVScore1, CVScore2, Accuracy = neuralNetwork.report()
+        CV1_Scores = np.append(CV1_Scores, CVScore1)
+        CV2_Scores = np.append(CV2_Scores, CVScore2)
+        Accuracy_Scores = np.append(Accuracy_Scores, Accuracy)
 
     df = pd.DataFrame(
         data={'Cross Validation Score with 5 folds': CV1_Scores, 'Cross Validation Score with 10 folds': CV2_Scores,
-              'Accuracy Score:': Accuracy_Scores}, index=range(1, 5))
+              'Accuracy Score:': Accuracy_Scores}, index=range(1, 11))
     df.plot()
     plt.show()
     neuralNetwork.plot_learning_curve()

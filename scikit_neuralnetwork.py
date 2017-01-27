@@ -9,11 +9,12 @@ import pydotplus
 import matplotlib.pyplot as plt
 
 class neural_network:
-    def __init__(self, X, Y, KFolds):
+    def __init__(self, X, Y, KFolds, hiddenLayerSizes):
         self.X = X
         self.Y = Y
         self.KFolds = KFolds
         self.split(X, Y)
+        self.hiddenLayerSizes = hiddenLayerSizes
         return
 
     def split(self,X,Y):
@@ -23,7 +24,7 @@ class neural_network:
         self.testX, self.testY = X[test_index], Y[test_index]
 
     def train(self):
-        self.clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(15,), random_state=1)
+        self.clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(self.hiddenLayerSizes,), random_state=1)
         self.clf.fit(self.trainX, self.trainY)
         self.y_pred = self.clf.predict(self.testX)
         # dot_data = MLPClassifier.export_graphviz(clf, out_file=None)
