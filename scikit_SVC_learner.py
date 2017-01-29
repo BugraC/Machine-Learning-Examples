@@ -10,12 +10,13 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 
 class support_vector_machines:
-    def __init__(self, X, Y, KFolds, kernelFunction):
+    def __init__(self, X, Y, KFolds, kernelFunction,isRegression):
         self.KFolds = KFolds
         self.X = X
         self.Y = Y
         self.split(X, Y)
         self.kernelFunction = kernelFunction
+        self.isRegression = isRegression
         return
 
 
@@ -28,15 +29,22 @@ class support_vector_machines:
 
     def train(self, degree, gamma):
         C = 1.0
-        if self.kernelFunction == 'poly':
-            self.clf = svm.SVC(degree=degree, C=C, cache_size=240000)
-        elif self.kernelFunction == 'rbf':
-            self.clf = svm.SVC(kernel=self.kernelFunction, gamma=gamma, C=C, cache_size=240000)
+        if(self.isRegression):
+            if self.kernelFunction == 'poly':
+                self.clf = svm.SVR(degree=degree, C=C, cache_size=240000)
+            elif self.kernelFunction == 'rbf':
+                self.clf = svm.SVR(kernel=self.kernelFunction, gamma=gamma, C=C, cache_size=240000)
+        else:
+            if self.kernelFunction == 'poly':
+                self.clf = svm.SVC(degree=degree, C=C, cache_size=240000)
+            elif self.kernelFunction == 'rbf':
+                self.clf = svm.SVC(kernel=self.kernelFunction, gamma=gamma, C=C, cache_size=240000)
         # X = np.array([[-1, -1], [-2, -1], [1, 1], [2, 1]])
         # y = np.array([1, 1, 2, 2])
         self.clf.fit(self.trainX, self.trainY)
         # self.clf.fit(X, y)
         self.y_pred = self.clf.predict(self.testX)
+        self.y_pred_train = self.clf.predict(self.trainX)
         # self.y_pred = self.clf.predict([[-0.8, -1]])
 
 
@@ -56,3 +64,17 @@ class support_vector_machines:
     def plot_learning_curve(self):
         plot_learning_curve(self.clf, 'Learning Curves for SVC', self.X, self.Y, ylim=(0.1, 1.01), cv=5, n_jobs=4)
         plt.show()
+
+    def return_error(self):
+        error = 0
+        for i in range(len(self.trainY)):
+            error += (abs(self.trainY[i] - self.y_pred_train[i]) / self.trainY[i])
+        error_train_percent = error / len(self.trainY) * 100
+        print("Train error = "'{}'.format(error_train_percent) + " percent")
+
+        error = 0
+        for i in range(len(self.testY)):
+            error += (abs(self.y_pred[i] - self.testY[i]) / self.testY[i])
+        error_test_percent = error / len(self.testY) * 100
+        print("Test error = "'{}'.format(error_test_percent) + " percent")
+        return error_train_percent,error_test_percent

@@ -27,6 +27,7 @@ class neural_network:
         self.clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(self.hiddenLayerSizes,), random_state=1)
         self.clf.fit(self.trainX, self.trainY)
         self.y_pred = self.clf.predict(self.testX)
+        self.y_pred_train = self.clf.predict(self.trainX)
         # dot_data = MLPClassifier.export_graphviz(clf, out_file=None)
         # graph = pydotplus.graph_from_dot_data(dot_data)
         # graph.write_pdf("iris_neuralnetwork.pdf")
@@ -46,3 +47,17 @@ class neural_network:
     def plot_learning_curve(self):
         plot_learning_curve(self.clf, 'Learning Curves Neural Network', self.X, self.Y, ylim=(0.1, 1.01), cv=5, n_jobs=4)
         plt.show()
+
+    def return_error(self):
+        error = 0
+        for i in range(len(self.trainY)):
+            error += (abs(self.trainY[i] - self.y_pred_train[i]) / self.trainY[i])
+        error_train_percent = error / len(self.trainY) * 100
+        print("Train error = "'{}'.format(error_train_percent) + " percent")
+
+        error = 0
+        for i in range(len(self.testY)):
+            error += (abs(self.y_pred[i] - self.testY[i]) / self.testY[i])
+        error_test_percent = error / len(self.testY) * 100
+        print("Test error = "'{}'.format(error_test_percent) + " percent")
+        return error_train_percent,error_test_percent

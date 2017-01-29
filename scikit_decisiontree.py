@@ -7,18 +7,21 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeRegressor
 
 from learning_curve import plot_learning_curve
+from scikit_prunedregressiontree import dtclf_pruned_regressor
 from scikit_prunedtree import dtclf_pruned
 
 
 class decision_tree:
-    def __init__(self,X,Y,KFolds,NEstimators):
+    def __init__(self,X,Y,KFolds,NEstimators,isRegression):
         self.KFolds = KFolds
         self.X = X
         self.Y = Y
         self.split(X, Y)
         self.NEstimators = NEstimators
+        self.isRegression = isRegression
         return
 
 
@@ -31,23 +34,62 @@ class decision_tree:
     def train_with_boosting(self):
         rng = np.random.RandomState(1)
         print self.NEstimators
-
-        self.estimator = AdaBoostClassifier(base_estimator= dtclf_pruned(class_weight='auto'),random_state=rng,n_estimators=self.NEstimators, learning_rate=0.1)
+        if (self.isRegression):
+            self.estimator = AdaBoostClassifier(base_estimator= dtclf_pruned_regressor(class_weight='auto'),random_state=rng,n_estimators=self.NEstimators, learning_rate=0.1)
+        else:
+            self.estimator = AdaBoostClassifier(base_estimator=dtclf_pruned(class_weight='auto'), random_state=rng,
+                                                n_estimators=self.NEstimators, learning_rate=0.1)
         self.estimator.fit(self.X, self.Y)
         self.tree = self.estimator.estimators_[-1]
         self.testX = self.tree.valX
         self.testY = self.tree.valY
+        self.trainX = self.tree.trgX
+        self.trainY = self.tree.trgY
+
         self.y_pred_with_boost = self.estimator.predict(self.testX)
+        self.y_pred_training_with_boost = self.estimator.predict(self.trainX)
+
+
 
 
 
     def train_without_boosting(self):
-        self.tree_benchmark = dtclf_pruned(class_weight='auto')
+        if(self.isRegression):
+            self.tree_benchmark = dtclf_pruned_regressor(class_weight='auto')
+        else:
+            self.tree_benchmark = dtclf_pruned(class_weight='auto')
+
         self.tree = self.tree_benchmark.fit(self.X, self.Y)
         self.testX = self.tree.valX
         self.testY = self.tree.valY
-        self.y_pred_benchmark = self.tree_benchmark.predict(self.testX)
+        self.trainX = self.tree.trgX
+        self.trainY = self.tree.trgY
 
+        self.y_pred_benchmark = self.tree_benchmark.predict(self.testX)
+        self.y_pred_training_without_boost = self.tree_benchmark.predict(self.trainX)
+
+
+    def train_without_boosting_without_pruning(self):
+        if (self.isRegression):
+            self.tree_benchmark = DecisionTreeClassifier(class_weight='auto')
+        else:
+            self.tree_benchmark = DecisionTreeRegressor()
+        self.tree = self.tree_benchmark.fit(self.trainX, self.trainY)
+
+        self.y_pred_benchmark = self.tree_benchmark.predict(self.testX)
+        self.y_pred_training_without_boost = self.tree_benchmark.predict(self.trainX)
+
+
+    def report_without_boosting_without_pruning(self):
+        # print(classification_report(self.testY, self.y_pred_with_boost))
+        CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.tree_benchmark, self.testX, self.testY,
+                                                               cv=self.KFolds).mean(), cross_val_score(self.tree_benchmark,
+                                                                                                       self.testX,
+                                                                                                       self.testY,
+                                                                                                       cv=self.KFolds * 2).mean(), accuracy_score(
+            self.testY, self.y_pred_benchmark)
+
+        return CV_Score1, CV_Score2, Accuracy_Score
 
     def report_with_boosting(self):
         # print(classification_report(self.testY, self.y_pred_with_boost))
@@ -79,8 +121,41 @@ class decision_tree:
         plot_learning_curve(self.tree_benchmark, 'Learning Curves Decision Tree', self.X, self.Y, ylim=(0.1, 1.01), cv=5, n_jobs=4)
         plt.show()
 
+    def plot_learning_curve_without_boosting_without_pruning(self):
+        plot_learning_curve(self.tree_benchmark, 'Learning Curves Decision Tree', self.testX, self.testY, ylim=(0.1, 1.01),
+                                cv=5, n_jobs=4)
+        plt.show()
+
 
     def plot_learning_curve_with_boosting(self):
         plot_learning_curve(self.estimator, 'Learning Curves Decision Tree With Boosting', self.X, self.Y, ylim=(0.1, 1.01), cv=5, n_jobs=4)
         plt.show()
 
+
+    def return_error_without_boosting_without_pruning(self):
+        error = 0
+        for i in range(len(self.trainY)):
+            error += (abs(self.trainY[i] - self.y_pred_training_without_boost[i]) / self.trainY[i])
+        error_train_percent = error / len(self.trainY) * 100
+        print("Train error = "'{}'.format(error_train_percent) + " percent")
+
+        error = 0
+        for i in range(len(self.testY)):
+            error += (abs(self.y_pred_benchmark[i] - self.testY[i]) / self.testY[i])
+        error_test_percent = error / len(self.testY) * 100
+        print("Test error = "'{}'.format(error_test_percent) + " percent")
+        return error_train_percent,error_test_percent
+
+    def return_error_with_boost(self):
+        error = 0
+        for i in range(len(self.trainY)):
+            error += (abs(self.trainY[i] - self.y_pred_training_with_boost[i]) / self.trainY[i])
+        error_train_percent = error / len(self.trainY) * 100
+        print("Train error = "'{}'.format(error_train_percent) + " percent")
+
+        error = 0
+        for i in range(len(self.testY)):
+            error += (abs(self.y_pred_with_boost[i] - self.testY[i]) / self.testY[i])
+        error_test_percent = error / len(self.testY) * 100
+        print("Test error = "'{}'.format(error_test_percent) + " percent")
+        return error_train_percent,error_test_percent
