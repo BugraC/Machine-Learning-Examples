@@ -46,23 +46,23 @@ class dtclf_pruned_regressor(dtclf):
     def fit(self, X, Y, sample_weight=None, check_input=True, X_idx_sorted=None):
         if sample_weight is None:
             sample_weight = np.ones(X.shape[0])
-        self.trgX = X.copy()
-        self.trgY = Y.copy()
+        # self.trgX = X.copy()
+        # self.trgY = Y.copy()
         self.trgWts = sample_weight.copy()
-        sss = ms.StratifiedShuffleSplit(n_splits=1, test_size=0.3, random_state=123)
-        for train_index, test_index in sss.split(self.trgX, self.trgY):
-            self.valX = self.trgX[test_index]
-            self.valY = self.trgY[test_index]
-            self.trgX = self.trgX[train_index]
-            self.trgY = self.trgY[train_index]
+        sss = ms.StratifiedKFold(n_splits=2,random_state=123)
+        for train_index, test_index in sss.split(X, Y):
+            self.valX = X[test_index]
+            self.valY = Y[test_index]
+            self.trgX = X[train_index]
+            self.trgY = Y[train_index]
             self.valWts = sample_weight[test_index]
             self.trgWts = sample_weight[train_index]
-        super(dtclf_pruned, self).fit(self.trgX, self.trgY, self.trgWts, check_input, X_idx_sorted)
+        super(dtclf_pruned_regressor, self).fit(self.trgX, self.trgY, self.trgWts, check_input, X_idx_sorted)
         self.prune()
         return self
 
     def __init__(self,
-                 criterion="gini",
+                 criterion="mse",
                  splitter="best",
                  max_depth=None,
                  min_samples_split=2,
@@ -72,10 +72,9 @@ class dtclf_pruned_regressor(dtclf):
                  random_state=None,
                  max_leaf_nodes=None,
                  min_impurity_split=1e-7,
-                 class_weight=None,
                  presort=False,
                  alpha=0):
-        super(dtclf_pruned, self).__init__(
+        super(dtclf_pruned_regressor, self).__init__(
             criterion=criterion,
             splitter=splitter,
             max_depth=max_depth,
@@ -84,7 +83,6 @@ class dtclf_pruned_regressor(dtclf):
             min_weight_fraction_leaf=min_weight_fraction_leaf,
             max_features=max_features,
             max_leaf_nodes=max_leaf_nodes,
-            class_weight=class_weight,
             random_state=random_state,
             min_impurity_split=min_impurity_split,
             presort=presort)

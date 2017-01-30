@@ -5,22 +5,19 @@ import os
 import scikit_KNN_Learner
 import matplotlib.pyplot as plt
 import pandas as pd
-from scikit_SVC_learner import support_vector_machines
+from scikit_SVM_learner import support_vector_machines
 import sys
 
 
 def main():
-    dataFile = sys.argv[0]
-    isRegressor = False
-    if(dataFile == 'data/winequality-white.csv'):
-        isRegressor = False
-    elif(dataFile == 'data/movie_metadata.csv'):
-        isRegressor = True
+    # We are using two files here listed:
+    # 'data/winequality-white.csv'
+    # 'data/movie_metadata.csv'
+    dataFile = sys.argv[1]
+    isRegressor = (True if sys.argv[2] == 'True' else False)
 
 
-    # inf = open(os.path.join(os.path.dirname(__file__), 'data/winequality-white.csv'))
     inf = os.path.join(os.path.dirname(__file__), dataFile)
-    # inf = os.path.join(os.path.dirname(__file__), 'data/winequality-white.csv')
 
     data = genfromtext(inf,float)
 

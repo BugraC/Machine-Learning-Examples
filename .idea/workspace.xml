@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c3ae3a3-9f1f-4510-9a9b-c53badddd621" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scikit_prunedregressiontree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/movie_metadata.csv" afterPath="$PROJECT_DIR$/data/movie_metadata.csv" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scikit_SVC_learner.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scikit_KNN_Learner.py" afterPath="$PROJECT_DIR$/scikit_KNN_Learner.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scikit_SVC_learner.py" afterPath="$PROJECT_DIR$/scikit_SVC_learner.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scikit_decisiontree.py" afterPath="$PROJECT_DIR$/scikit_decisiontree.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scikit_learner.py" afterPath="$PROJECT_DIR$/scikit_learner.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scikit_neuralnetwork.py" afterPath="$PROJECT_DIR$/scikit_neuralnetwork.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scikit_prunedregressiontree.py" afterPath="$PROJECT_DIR$/scikit_prunedregressiontree.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,54 +25,10 @@
       <file leaf-file-name="scikit_decisiontree.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scikit_decisiontree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="57" lean-forward="false" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="57" />
+            <state relative-caret-position="315">
+              <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tree.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/tree/tree.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="963" column="8" lean-forward="false" selection-start-line="963" selection-start-column="8" selection-end-line="963" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="learning_curve.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/learning_curve.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cross_validation.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="1066" column="0" lean-forward="false" selection-start-line="1066" selection-start-column="0" selection-end-line="1066" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scikit_prunedtree.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scikit_prunedtree.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="25" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="90" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#56#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,8 +37,8 @@
       <file leaf-file-name="scikit_prunedregressiontree.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scikit_prunedregressiontree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="28" />
+            <state relative-caret-position="405">
+              <caret line="51" column="60" lean-forward="false" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="60" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
               </folding>
@@ -92,13 +46,45 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scikit_SVC_learner.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scikit_SVC_learner.py">
+      <file leaf-file-name="cross_validation.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-172">
-              <caret line="29" column="35" lean-forward="true" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+            <state relative-caret-position="307">
+              <caret line="917" column="0" lean-forward="false" selection-start-line="917" selection-start-column="0" selection-end-line="917" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scikit_prunedtree.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scikit_prunedtree.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-923">
+              <caret line="0" column="47" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scikit_SVM_learner.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scikit_SVM_learner.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="42" column="34" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="34" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scikit_neuralnetwork.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scikit_neuralnetwork.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="24">
+              <caret line="69" column="80" lean-forward="true" selection-start-line="69" selection-start-column="80" selection-end-line="69" selection-end-column="80" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,8 +93,8 @@
       <file leaf-file-name="scikit_KNN_Learner.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scikit_KNN_Learner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="31" column="45" lean-forward="true" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
+            <state relative-caret-position="-285">
+              <caret line="23" column="61" lean-forward="false" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -119,8 +105,8 @@
       <file leaf-file-name="scikit_learner.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scikit_learner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="189" column="25" lean-forward="true" selection-start-line="189" selection-start-column="25" selection-end-line="189" selection-end-column="25" />
+            <state relative-caret-position="240">
+              <caret line="31" column="57" lean-forward="true" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -128,11 +114,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shape_base.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python2.7/dist-packages/numpy/core/shape_base.py">
+      <file leaf-file-name="frame.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python2.7/dist-packages/pandas/core/frame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="229" column="0" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+            <state relative-caret-position="250">
+              <caret line="255" column="0" lean-forward="false" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_split.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/model_selection/_split.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="580" column="0" lean-forward="false" selection-start-line="580" selection-start-column="0" selection-end-line="580" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -152,6 +148,7 @@
       <find>predict</find>
       <find>decisionTreeErrorWithoutPruning</find>
       <find>dtclf_pruned</find>
+      <find>The least populated class in y</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -168,13 +165,14 @@
         <option value="$PROJECT_DIR$/KNN_Learner.py" />
         <option value="$PROJECT_DIR$/scikit_SVR_learner.py" />
         <option value="$PROJECT_DIR$/learning_curve.py" />
-        <option value="$PROJECT_DIR$/scikit_neuralnetwork.py" />
         <option value="$PROJECT_DIR$/scikit_prunedtree.py" />
         <option value="$PROJECT_DIR$/scikit_prunedregressiontree.py" />
-        <option value="$PROJECT_DIR$/scikit_decisiontree.py" />
-        <option value="$PROJECT_DIR$/scikit_KNN_Learner.py" />
         <option value="$PROJECT_DIR$/scikit_SVC_learner.py" />
+        <option value="$PROJECT_DIR$/scikit_neuralnetwork.py" />
+        <option value="$PROJECT_DIR$/scikit_SVM_learner.py" />
+        <option value="$PROJECT_DIR$/scikit_KNN_Learner.py" />
         <option value="$PROJECT_DIR$/scikit_learner.py" />
+        <option value="$PROJECT_DIR$/scikit_decisiontree.py" />
       </list>
     </option>
   </component>
@@ -248,7 +246,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ScikitLearn" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scikit_learner.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="PARAMETERS" value="data/movie_metadata.csv True" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
@@ -464,9 +462,9 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.scikit_learner" />
-        <item index="1" class="java.lang.String" itemvalue="Python.shape_base" />
-        <item index="2" class="java.lang.String" itemvalue="Python.pydevd" />
-        <item index="3" class="java.lang.String" itemvalue="Python.scikit_decisiontree" />
+        <item index="1" class="java.lang.String" itemvalue="Python.scikit_decisiontree" />
+        <item index="2" class="java.lang.String" itemvalue="Python.shape_base" />
+        <item index="3" class="java.lang.String" itemvalue="Python.pydevd" />
         <item index="4" class="java.lang.String" itemvalue="Python.Example" />
       </list>
     </recent_temporary>
@@ -486,18 +484,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="951" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18995634" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1817116" sideWeight="0.55021834" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4267292" sideWeight="0.5769651" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.49563318" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1817116" sideWeight="0.44978166" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4267292" sideWeight="0.42303494" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.4978166" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5427902" sideWeight="0.5049127" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3587339" sideWeight="0.62882096" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -515,92 +513,89 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/scikit_neuralnetwork.py</url>
-          <line>33</line>
+          <line>51</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
-          <line>144</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scikit_SVC_learner.py</url>
-          <line>45</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scikit_SVC_learner.py</url>
-          <line>43</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/scikit_decisiontree.py</url>
-          <line>102</line>
+          <line>139</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/scikit_learner.py</url>
-          <line>26</line>
+          <line>23</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
+          <line>15</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
+          <line>90</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
+          <line>127</line>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
+          <line>153</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
+          <line>133</line>
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_decisiontree.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="97" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scikit_learner.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="76" />
+      <option name="time" value="99" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="r" language="Python" />
-        <watch expression="np.array(np.array(r)[1:][:])[0,1]" language="Python" />
-        <watch expression="np.vstack((r, np.array(row_value)))" language="Python" />
-        <watch expression="np.array(row_value)" language="Python" />
-        <watch expression="np.vstack((r, np.array(row_value)))" language="Python" />
-        <watch expression="np.array(row_value)" language="Python" />
-        <watch expression="row_value" language="Python" />
-        <watch expression="np.array(row_value)" language="Python" />
-        <watch expression="r[0,-1]" language="Python" />
+        <watch expression="split.split(self.X, self.Y)" language="Python" />
+        <watch expression="self.y" language="Python" />
+        <watch expression="bincount(self.y_indices)" language="Python" />
+        <watch expression="Y" language="Python" />
+        <watch expression="ShuffleSplit(Y, test_size=.3)" language="Python" />
+        <watch expression="StratifiedShuffleSplit(Y, n_iter=100, test_size=0.3)" language="Python" />
+        <watch expression="self.y[self.y_indices]" language="Python" />
+        <watch expression="self.y_pred_benchmark" language="Python" />
+        <watch expression="self.trgX[test_index]" />
+        <watch expression="X[test_index]" language="Python" />
+        <watch expression="sys.argv[2]" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15885">
-          <caret line="1059" column="0" lean-forward="false" selection-start-line="1059" selection-start-column="0" selection-end-line="1059" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python2.7/posixpath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1095">
-          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scikit_learner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scikit_KNN_Learner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="24" column="26" lean-forward="false" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/tree/export.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6390">
-          <caret line="432" column="0" lean-forward="false" selection-start-line="432" selection-start-column="0" selection-end-line="432" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scikit_neuralnetwork.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -685,13 +680,6 @@
     <entry file="file://$PROJECT_DIR$/KNN-Learner.py" />
     <entry file="file://$PROJECT_DIR$/Example.py" />
     <entry file="file://$PROJECT_DIR$/KNN_Learner.py" />
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/metrics/classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="1390" column="0" lean-forward="false" selection-start-line="1390" selection-start-column="0" selection-end-line="1390" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/utils/multiclass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
@@ -778,44 +766,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/model_selection/_split.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="580" column="0" lean-forward="false" selection-start-line="580" selection-start-column="0" selection-end-line="580" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/utils/class_weight.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="703">
           <caret line="59" column="45" lean-forward="true" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/ensemble/weight_boosting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-765">
-          <caret line="369" column="8" lean-forward="false" selection-start-line="369" selection-start-column="8" selection-end-line="369" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scikit_neuralnetwork.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="62" column="35" lean-forward="false" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="1591" column="23" lean-forward="true" selection-start-line="1591" selection-start-column="23" selection-end-line="1591" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -836,14 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="1066" column="0" lean-forward="false" selection-start-line="1066" selection-start-column="0" selection-end-line="1066" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/learning_curve.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -854,38 +800,138 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/utils/fixes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="320" column="8" lean-forward="false" selection-start-line="320" selection-start-column="8" selection-end-line="320" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/metrics/classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="385" column="0" lean-forward="false" selection-start-line="385" selection-start-column="0" selection-end-line="385" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/tree/tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="319" column="0" lean-forward="false" selection-start-line="319" selection-start-column="0" selection-end-line="319" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="973" column="0" lean-forward="false" selection-start-line="973" selection-start-column="0" selection-end-line="973" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/ensemble/weight_boosting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="431" column="36" lean-forward="true" selection-start-line="431" selection-start-column="36" selection-end-line="431" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/model_selection/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scikit_SVC_learner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/model_selection/_split.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="580" column="0" lean-forward="false" selection-start-line="580" selection-start-column="0" selection-end-line="580" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/pandas/core/frame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="255" column="0" lean-forward="false" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scikit_neuralnetwork.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="69" column="80" lean-forward="true" selection-start-line="69" selection-start-column="80" selection-end-line="69" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scikit_SVM_learner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="42" column="34" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="917" column="0" lean-forward="false" selection-start-line="917" selection-start-column="0" selection-end-line="917" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scikit_prunedtree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="25" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="90" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-923">
+          <caret line="0" column="47" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scikit_prunedregressiontree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="28" />
+        <state relative-caret-position="405">
+          <caret line="51" column="60" lean-forward="false" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="60" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/tree/tree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="963" column="8" lean-forward="false" selection-start-line="963" selection-start-column="8" selection-end-line="963" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scikit_KNN_Learner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="31" column="45" lean-forward="true" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
+        <state relative-caret-position="-285">
+          <caret line="23" column="61" lean-forward="false" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -894,28 +940,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scikit_decisiontree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="57" lean-forward="false" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="57" />
+        <state relative-caret-position="315">
+          <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scikit_SVC_learner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-172">
-          <caret line="29" column="35" lean-forward="true" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scikit_learner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="189" column="25" lean-forward="true" selection-start-line="189" selection-start-column="25" selection-end-line="189" selection-end-column="25" />
+        <state relative-caret-position="240">
+          <caret line="31" column="57" lean-forward="true" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

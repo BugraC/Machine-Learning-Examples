@@ -3,39 +3,52 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.cross_validation import StratifiedShuffleSplit
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import AdaBoostRegressor
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import DecisionTreeRegressor
-
+from sklearn.model_selection import ShuffleSplit
 from learning_curve import plot_learning_curve
 from scikit_prunedregressiontree import dtclf_pruned_regressor
 from scikit_prunedtree import dtclf_pruned
-
+import sklearn.model_selection as ms
+from sklearn.model_selection import train_test_split
 
 class decision_tree:
     def __init__(self,X,Y,KFolds,NEstimators,isRegression):
         self.KFolds = KFolds
         self.X = X
         self.Y = Y
+        self.isRegression = isRegression
         self.split(X, Y)
         self.NEstimators = NEstimators
-        self.isRegression = isRegression
+
         return
 
 
     def split(self,X,Y):
-        split = StratifiedShuffleSplit(Y, n_iter=100, test_size=0.3)
-        train_index, test_index = list(split)[0]
-        self.trainX, self.trainY = X[train_index], Y[train_index]
-        self.testX, self.testY = X[test_index], Y[test_index]
+        # split = None
+        # if(self.isRegression):
+        self.trainX, self.testX, self.trainY, self.testY  = train_test_split(X, Y, test_size = 0.50, random_state = 123)
+            # split = ShuffleSplit(n_splits=100,random_state=123, test_size=0.3)
+            # for train_index, test_index in split.split(self.X, self.Y):
+            #     self.trainX = self.X[train_index]
+            #     self.trainY = self.Y[train_index]
+            #     self.testX = self.X[test_index]
+            #     self.testY = self.Y[test_index]
+        # else:
+        #     split = StratifiedShuffleSplit(Y, n_iter=100, test_size=0.3)
+        #     train_index, test_index = list(split)[0]
+        #     self.trainX, self.trainY = X[train_index], Y[train_index]
+        #     self.testX, self.testY = X[test_index], Y[test_index]
 
     def train_with_boosting(self):
         rng = np.random.RandomState(1)
         print self.NEstimators
         if (self.isRegression):
-            self.estimator = AdaBoostClassifier(base_estimator= dtclf_pruned_regressor(class_weight='auto'),random_state=rng,n_estimators=self.NEstimators, learning_rate=0.1)
+            self.estimator = AdaBoostRegressor(base_estimator= dtclf_pruned_regressor(),random_state=rng,n_estimators=self.NEstimators, learning_rate=0.1)
         else:
             self.estimator = AdaBoostClassifier(base_estimator=dtclf_pruned(class_weight='auto'), random_state=rng,
                                                 n_estimators=self.NEstimators, learning_rate=0.1)
@@ -55,7 +68,7 @@ class decision_tree:
 
     def train_without_boosting(self):
         if(self.isRegression):
-            self.tree_benchmark = dtclf_pruned_regressor(class_weight='auto')
+            self.tree_benchmark = dtclf_pruned_regressor()
         else:
             self.tree_benchmark = dtclf_pruned(class_weight='auto')
 
@@ -71,9 +84,9 @@ class decision_tree:
 
     def train_without_boosting_without_pruning(self):
         if (self.isRegression):
-            self.tree_benchmark = DecisionTreeClassifier(class_weight='auto')
+            self.tree_benchmark = DecisionTreeRegressor(random_state=123)
         else:
-            self.tree_benchmark = DecisionTreeRegressor()
+            self.tree_benchmark = DecisionTreeClassifier(class_weight='auto')
         self.tree = self.tree_benchmark.fit(self.trainX, self.trainY)
 
         self.y_pred_benchmark = self.tree_benchmark.predict(self.testX)
@@ -81,41 +94,76 @@ class decision_tree:
 
 
     def report_without_boosting_without_pruning(self):
-        # print(classification_report(self.testY, self.y_pred_with_boost))
-        CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.tree_benchmark, self.testX, self.testY,
-                                                               cv=self.KFolds).mean(), cross_val_score(self.tree_benchmark,
-                                                                                                       self.testX,
-                                                                                                       self.testY,
-                                                                                                       cv=self.KFolds * 2).mean(), accuracy_score(
-            self.testY, self.y_pred_benchmark)
+        if (self.isRegression):
+            # print(classification_report(self.testY, self.y_pred_with_boost))
+            CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.tree_benchmark, self.testX, self.testY,
+                                                                   cv=self.KFolds).mean(), cross_val_score(
+                self.tree_benchmark,
+                self.testX,
+                self.testY,
+                cv=self.KFolds * 2).mean(), self.tree_benchmark.score(
+                self.testX, self.testY)
 
-        return CV_Score1, CV_Score2, Accuracy_Score
+            return CV_Score1, CV_Score2, Accuracy_Score
+        else:
+            # print(classification_report(self.testY, self.y_pred_with_boost))
+            CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.tree_benchmark, self.testX, self.testY,
+                                                                   cv=self.KFolds).mean(), cross_val_score(self.tree_benchmark,
+                                                                                                           self.testX,
+                                                                                                           self.testY,
+                                                                                                           cv=self.KFolds * 2).mean(), accuracy_score(
+                self.testY, self.y_pred_benchmark)
+
+            return CV_Score1, CV_Score2, Accuracy_Score
 
     def report_with_boosting(self):
-        # print(classification_report(self.testY, self.y_pred_with_boost))
-        CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.estimator , self.X, self.Y,
-                                                               cv=self.KFolds).mean(), cross_val_score(self.estimator,
-                                                                                                       self.X,
-                                                                                                       self.Y,
-                                                                                                       cv=self.KFolds * 2).mean(), accuracy_score(
-            self.testY, self.y_pred_with_boost)
+        if (self.isRegression):
+            # print(classification_report(self.testY, self.y_pred_with_boost))
+            CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.estimator, self.X, self.Y,
+                                                                   cv=self.KFolds).mean(), cross_val_score(
+                self.estimator,
+                self.X,
+                self.Y,
+                cv=self.KFolds * 2).mean(), self.estimator.score(
+                self.testX, self.testY)
 
-        return CV_Score1, CV_Score2, Accuracy_Score
+            return CV_Score1, CV_Score2, Accuracy_Score
+        else:
+            # print(classification_report(self.testY, self.y_pred_with_boost))
+            CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.estimator , self.X, self.Y,
+                                                                   cv=self.KFolds).mean(), cross_val_score(self.estimator,
+                                                                                                           self.X,
+                                                                                                           self.Y,
+                                                                                                           cv=self.KFolds * 2).mean(), accuracy_score(
+                self.testY, self.y_pred_with_boost)
+
+            return CV_Score1, CV_Score2, Accuracy_Score
 
     def report_without_boosting(self):
-        # print(classification_report(self.testY, self.y_pred_benchmark))
-        #
-        # dot_data = tree.export_graphviz(self.tree_benchmark, class_names=True, out_file=None)
-        # graph = pydotplus.graph_from_dot_data(dot_data)
-        # graph.write_pdf("wine-quality-red.pdf")
-        CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.tree_benchmark, self.X, self.Y,
-                                                               cv=self.KFolds).mean(), cross_val_score(self.tree_benchmark,
-                                                                                                       self.X,
-                                                                                                       self.Y,
-                                                                                                       cv=self.KFolds * 2).mean(), accuracy_score(
-            self.testY, self.y_pred_benchmark)
+        if (self.isRegression):
+            CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.tree_benchmark, self.X, self.Y,
+                                                                   cv=self.KFolds).mean(), cross_val_score(
+                self.tree_benchmark,
+                self.X,
+                self.Y,
+                cv=self.KFolds * 2).mean(), self.tree_benchmark.score(
+                self.testX, self.testY)
 
-        return CV_Score1, CV_Score2, Accuracy_Score
+            return CV_Score1, CV_Score2, Accuracy_Score
+        else:
+            # print(classification_report(self.testY, self.y_pred_benchmark))
+            #
+            # dot_data = tree.export_graphviz(self.tree_benchmark, class_names=True, out_file=None)
+            # graph = pydotplus.graph_from_dot_data(dot_data)
+            # graph.write_pdf("wine-quality-red.pdf")
+            CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.tree_benchmark, self.X, self.Y,
+                                                                   cv=self.KFolds).mean(), cross_val_score(self.tree_benchmark,
+                                                                                                           self.X,
+                                                                                                           self.Y,
+                                                                                                           cv=self.KFolds * 2).mean(), accuracy_score(
+                self.testY, self.y_pred_benchmark)
+
+            return CV_Score1, CV_Score2, Accuracy_Score
 
     def plot_learning_curve_without_boosting(self):
         plot_learning_curve(self.tree_benchmark, 'Learning Curves Decision Tree', self.X, self.Y, ylim=(0.1, 1.01), cv=5, n_jobs=4)
