@@ -1,7 +1,7 @@
 from sklearn.tree import DecisionTreeClassifier as dtclf
 import numpy as np
 import sklearn.model_selection as ms
-
+from sklearn.model_selection import train_test_split
 
 class dtclf_pruned(dtclf):
     def remove_subtree(self, root):
@@ -49,15 +49,15 @@ class dtclf_pruned(dtclf):
         self.trgX = X.copy()
         self.trgY = Y.copy()
         self.trgWts = sample_weight.copy()
-        sss = ms.StratifiedShuffleSplit(n_splits=1, test_size=0.3, random_state=123)
-        for train_index, test_index in sss.split(self.trgX, self.trgY):
-            self.valX = self.trgX[test_index]
-            self.valY = self.trgY[test_index]
-            self.trgX = self.trgX[train_index]
-            self.trgY = self.trgY[train_index]
-            self.valWts = sample_weight[test_index]
-            self.trgWts = sample_weight[train_index]
-        super(dtclf_pruned, self).fit(self.trgX, self.trgY, self.trgWts, check_input, X_idx_sorted)
+        self.trgX, self.valX, self.trgY, self.valY = train_test_split(self.trgX, self.trgY, test_size=0.3, random_state=123)
+        # for train_index, test_index in sss.split(self.trgX, self.trgY):
+        #     self.valX = self.trgX[test_index]
+        #     self.valY = self.trgY[test_index]
+        #     self.trgX = self.trgX[train_index]
+        #     self.trgY = self.trgY[train_index]
+        #     self.valWts = sample_weight[test_index]
+        #     self.trgWts = sample_weight[train_index]
+        super(dtclf_pruned, self).fit(self.trgX, self.trgY, sample_weight=None,check_input= check_input,X_idx_sorted= X_idx_sorted)
         self.prune()
         return self
 
