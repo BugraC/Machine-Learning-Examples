@@ -17,6 +17,8 @@ from scikit_prunedtree import dtclf_pruned
 import sklearn.model_selection as ms
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import confusion_matrix
 
 class decision_tree:
     def __init__(self,X,Y,KFolds,NEstimators,isRegression):
@@ -57,7 +59,7 @@ class decision_tree:
         #     self.trainX, self.trainY = X[train_index], Y[train_index]
         #     self.testX, self.testY = X[test_index], Y[test_index]
 
-    def train_with_boosting(self):
+    def train_with_boosting(self,skipTrain = False):
         rng = np.random.RandomState(1)
         print self.NEstimators
         if (self.isRegression):
@@ -65,24 +67,24 @@ class decision_tree:
         else:
             self.estimator = AdaBoostClassifier(base_estimator=dtclf_pruned(class_weight='auto'), random_state=rng,
                                                 n_estimators=self.NEstimators, learning_rate=0.1)
+        if(skipTrain == False):
+            parameters = {'base_estimator__criterion': ['gini'],
+                          # 'max_depth': [4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 30, 40, 50, 70, 90, 120, 150],
+                          # "base_estimator__splitter": ["best", "random"],
+                          "n_estimators": [1,2,3,4,5,6,7,8,9,10]
+                          }
+            self.clf_tuned = GridSearchCV(self.estimator, cv=5, param_grid=parameters)
+            self.tree = self.clf_tuned.fit(self.trainX, self.trainY)
+            print('Best parameters: %s' % self.clf_tuned.best_params_)
+            # self.estimator.fit(self.X, self.Y)
+            self.tree =self.clf_tuned.best_estimator_.estimators_[-1]
+            self.testX = self.tree.valX
+            self.testY = self.tree.valY
+            self.trainX = self.tree.trgX
+            self.trainY = self.tree.trgY
 
-        parameters = {'base_estimator__criterion': ['gini'],
-                      # 'max_depth': [4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 30, 40, 50, 70, 90, 120, 150],
-                      # "base_estimator__splitter": ["best", "random"],
-                      "n_estimators": [1,2,3,4,5,6,7,8,9,10]
-                      }
-        self.clf_tuned = GridSearchCV(self.estimator, cv=5, param_grid=parameters)
-        self.tree = self.clf_tuned.fit(self.trainX, self.trainY)
-        print('Best parameters: %s' % self.clf_tuned.best_params_)
-        # self.estimator.fit(self.X, self.Y)
-        self.tree =self.clf_tuned.best_estimator_.estimators_[-1]
-        self.testX = self.tree.valX
-        self.testY = self.tree.valY
-        self.trainX = self.tree.trgX
-        self.trainY = self.tree.trgY
-
-        self.y_pred_with_boost = self.clf_tuned.best_estimator_.predict(self.testX)
-        self.y_pred_training_with_boost = self.clf_tuned.best_estimator_.predict(self.trainX)
+            self.y_pred_with_boost = self.clf_tuned.best_estimator_.predict(self.testX)
+            self.y_pred_training_with_boost = self.clf_tuned.best_estimator_.predict(self.trainX)
 
 
 
@@ -155,10 +157,11 @@ class decision_tree:
             return CV_Score1, CV_Score2, Accuracy_Score
 
     def report_with_boosting(self):
-        rng = np.random.RandomState(1)
         if (self.isRegression):
-            self.estimator = AdaBoostRegressor(base_estimator=dtclf_pruned_regressor(), random_state=rng,
+            self.estimator = AdaBoostRegressor(base_estimator=dtclf_pruned_regressor(criterion='gini',max_depth=40),
                                                n_estimators=self.NEstimators, learning_rate=0.1)
+            self.estimator.fit(self.trainX, self.trainY)
+            self.y_pred_with_boost = self.estimator.predict(self.testX)
             # print(classification_report(self.testY, self.y_pred_with_boost))
             CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.estimator, self.testX, self.testY,
                                                                    cv=self.KFolds).mean(), cross_val_score(
@@ -166,19 +169,21 @@ class decision_tree:
                 self.testX,
                 self.testY,
                 cv=self.KFolds * 2).mean(), accuracy_score(
-                self.testY, self.y_pred_benchmark)
+                self.testY, self.y_pred_with_boost)
 
             return CV_Score1, CV_Score2, Accuracy_Score
         else:
-            self.estimator = AdaBoostClassifier(base_estimator=dtclf_pruned(class_weight='auto'), random_state=rng,
+            self.estimator = AdaBoostClassifier(base_estimator=dtclf_pruned(criterion='gini',max_depth=40),
                                                 n_estimators=self.NEstimators, learning_rate=0.1)
+            self.estimator.fit(self.trainX, self.trainY)
+            self.y_pred_with_boost = self.estimator.predict(self.testX)
             # print(classification_report(self.testY, self.y_pred_with_boost))
             CV_Score1, CV_Score2, Accuracy_Score = cross_val_score(self.estimator, self.testX, self.testY,
                                                                    cv=self.KFolds).mean(), cross_val_score(self.estimator,
                                                                                                            self.testX,
                                                                                                            self.testY,
                                                                                                            cv=self.KFolds * 2).mean(), accuracy_score(
-                self.testY, self.y_pred_benchmark)
+                self.testY, self.y_pred_with_boost)
 
             return CV_Score1, CV_Score2, Accuracy_Score
 
@@ -229,29 +234,63 @@ class decision_tree:
 
 
     def return_error_without_boosting_without_pruning(self):
-        error = 0.0
-        for i in range(len(self.trainY)):
-            error += (abs(self.y_pred_training_without_boost[i] - self.trainY[i]) / self.trainY[i])
-        error_train_percent = error / len(self.trainY) * 100
+        # error = 0.0
+        # for i in range(len(self.trainY)):
+        #     error += (abs(self.y_pred_training_without_boost[i] - self.trainY[i]) / self.trainY[i])
+        # error_train_percent = error / len(self.trainY) * 100
+        error_train_percent = mean_squared_error(self.trainY, self.y_pred_training_without_boost)
         print("Train error = "'{}'.format(error_train_percent) + " percent")
 
-        error = 0.0
-        for i in range(len(self.testY)):
-            error += (abs(self.y_pred_benchmark[i] - self.testY[i]) / self.testY[i])
-        error_test_percent = error / len(self.testY) * 100
+        # error = 0.0
+        # for i in range(len(self.testY)):
+        #     error += (abs(self.y_pred_benchmark[i] - self.testY[i]) / self.testY[i])
+        # error_test_percent = error / len(self.testY) * 100
+        error_test_percent = mean_squared_error(self.testY, self.y_pred_benchmark)
         print("Test error = "'{}'.format(error_test_percent) + " percent")
         return error_train_percent,error_test_percent
 
     def return_error_with_boost(self):
-        error = 0.0
-        for i in range(len(self.trainY)):
-            error += (abs(self.y_pred_training_with_boost[i] - self.trainY[i]) / self.trainY[i])
-        error_train_percent = error / len(self.trainY) * 100
+        # error = 0.0
+        # for i in range(len(self.trainY)):
+        #     error += (abs(self.y_pred_training_with_boost[i] - self.trainY[i]) / self.trainY[i])
+        # error_train_percent = error / len(self.trainY) * 100
+        # print("Train error = "'{}'.format(error_train_percent) + " percent")
+        error_train_percent = mean_squared_error(self.trainY, self.y_pred_training_with_boost)
         print("Train error = "'{}'.format(error_train_percent) + " percent")
 
-        error = 0.0
-        for i in range(len(self.testY)):
-            error += (abs(self.y_pred_with_boost[i] - self.testY[i]) / self.testY[i])
-        error_test_percent = error / len(self.testY) * 100
+        # error = 0.0
+        # for i in range(len(self.testY)):
+        #     error += (abs(self.y_pred_with_boost[i] - self.testY[i]) / self.testY[i])
+        # error_test_percent = error / len(self.testY) * 100
+        # print("Test error = "'{}'.format(error_test_percent) + " percent")
+        error_test_percent = mean_squared_error(self.testY, self.y_pred_with_boost)
         print("Test error = "'{}'.format(error_test_percent) + " percent")
         return error_train_percent,error_test_percent
+
+    def confusion_matrix_without_boost(self):
+        # Compute confusion matrix
+        cm = confusion_matrix(self.testY, self.y_pred_benchmark)
+
+        print(cm)
+
+        # Show confusion matrix in a separate window
+        plt.matshow(cm)
+        plt.title('Confusion matrix')
+        plt.colorbar()
+        plt.ylabel('True label')
+        plt.xlabel('Predicted label')
+        plt.show()
+
+    def confusion_matrix_with_boost(self):
+        # Compute confusion matrix
+        cm = confusion_matrix(self.testY, self.y_pred_with_boost)
+
+        print(cm)
+
+        # Show confusion matrix in a separate window
+        plt.matshow(cm)
+        plt.title('Confusion matrix')
+        plt.colorbar()
+        plt.ylabel('True label')
+        plt.xlabel('Predicted label')
+        plt.show()
