@@ -65,10 +65,11 @@ class decision_tree:
         if (self.isRegression):
             self.estimator = AdaBoostRegressor(base_estimator=dtclf_pruned_regressor(),random_state=rng,n_estimators=self.NEstimators, learning_rate=0.1)
         else:
-            self.estimator = AdaBoostClassifier(base_estimator=dtclf_pruned(class_weight='auto'), random_state=rng,
+            self.estimator = AdaBoostClassifier(base_estimator=dtclf_pruned(), random_state=rng,
                                                 n_estimators=self.NEstimators, learning_rate=0.1)
         if(skipTrain == False):
-            parameters = {'base_estimator__criterion': ['gini'],
+            parameters = {'base_estimator__criterion': ['entropy'],
+                          'base_estimator__max_depth': [150],
                           # 'max_depth': [4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 30, 40, 50, 70, 90, 120, 150],
                           # "base_estimator__splitter": ["best", "random"],
                           "n_estimators": [1,2,3,4,5,6,7,8,9,10]
